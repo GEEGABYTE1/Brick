@@ -75,34 +75,33 @@ class Script:
 
                 
             elif character == 5:
-                val = input_lst[character]
-                if '$' in val:
+                if '$' in input_lst[character]:
                     return 'command invalid'
+                else:
+                    val = int(input_lst[character])
 
             else:
                 continue 
     
-        destination_register_lst = self.system.number_registers[destination_register]
+        destination_register_lst = self.system.number_registers[int(destination_register)]
         if destination_idx >= len(destination_register_lst):
             return 'invalid command'
         
-        root_register_lst = self.system.number_registers[register_root]
+        root_register_lst = self.system.number_registers[int(register_root)]
         if register_root_idx > len(root_register_lst):
             return 'invalid command'
-        
-        root_value = root_register_lst[register_root_idx]
-        if root_value == None:
-            return 'there is no value in register {}'.format(register_root)
-        else:
+        try:
+            root_value = root_register_lst[register_root_idx]
             summation = val + root_value 
-            summation_bin = self.system.bin_to_int(summation)
+            summation_bin = self.system.int_to_bin(summation)
         
             destination_register_lst.append(summation_bin)
-            self.system.store_to_history_register(summation_bin)
+            self.system.store_to_history_register(summation)
             print('{} has been added succesfully to the register: {}'.format(summation_bin, destination_register))
             return True
-
-
+        
+        except IndexError:
+            return 'there is no value in register {}'.format(register_root)
 
 
 
