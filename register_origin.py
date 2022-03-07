@@ -29,8 +29,8 @@ class System:
 
     def load_value_from_register(self, register_address):
         index = self.bin_to_int(register_address)
-        int_value = int(self.number_registers[index])
-        return int_value
+        int_lst = self.number_registers[index]
+        return int_lst
 
     def store_to_history_register(self, result_to_store):
         if self.history_index >= 9:
