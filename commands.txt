@@ -1,0 +1,11 @@
+ # SUB 
+# SUBI
+# MULT
+# MULTI
+# DIV
+# DIVI 
+# LW 
+# ADDI 
+# SW 
+# XOR
+# J 
