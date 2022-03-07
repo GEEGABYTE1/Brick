@@ -1,20 +1,28 @@
 ### BASIC Arithmetic 
 
-from hashmap import registers
+from register_origin import System
 
 class Script:
+    
+    system = System()
     
     def running(self):
         while True:
             user_input = str(input(': '))
 
             user_input_formatted = user_input.strip(' ')
+            
+            if len(user_input_formatted) == 32:
+                self.system.binary_reader(user_input_formatted)
+
             user_input_split = user_input_formatted.split(' ')
+
 
             if 'ADDI' in user_input_split:
                 result = self.addi(user_input_split)
                 if result == 'invalid command':
                     print(result)
+            
 
     
 
@@ -44,16 +52,12 @@ class Script:
 
             else:
                 continue 
-
-        
-
-
-
-
-            
-            
     
- 
+        ## Fetching vals needs to be done
+
+
+
+
  
 process = Script()
 print(process.running())
