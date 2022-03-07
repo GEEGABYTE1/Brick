@@ -36,7 +36,7 @@ class System:
         if self.history_index >= 9:
             self.history_index = 0
         bin_history = self.int_to_bin(result_to_store)
-        self.store_to_history_register[self.history_index].append(bin_history)
+        self.history_registers[self.history_index].append(bin_history)
         self.history_index += 1
         self.temp_history_index = self.history_index
 

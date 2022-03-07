@@ -93,11 +93,10 @@ class Script:
         try:
             root_value = root_register_lst[register_root_idx]
             summation = val + root_value 
-            summation_bin = self.system.int_to_bin(summation)
         
-            destination_register_lst.append(summation_bin)
+            destination_register_lst.append(summation)
             self.system.store_to_history_register(summation)
-            print('{} has been added succesfully to the register: {}'.format(summation_bin, destination_register))
+            print('{} has been added succesfully to the register: {}'.format(summation, destination_register))
             return True
         
         except IndexError:
