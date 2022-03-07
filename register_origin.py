@@ -1,7 +1,7 @@
 class System:
     def __init__(self):
-        self.number_registers = [0 for i in range(21)]
-        self.history_registers = [0 for i in range(10)]
+        self.number_registers = [[] for i in range(21)]
+        self.history_registers = [[] for i in range(10)]
         self.number_index = 1
         self.history_index = 0 
         self.temp_history_index = 0
@@ -22,7 +22,7 @@ class System:
             self.number_index = 1
         
         value = self.bin_to_int(value_to_store)
-        self.number_registers[self.number_index] = value
+        self.number_registers[self.number_index].append(value)
         print("{value} was added to register {number_add}".format(value=value, number_add=self.number_index))
         self.number_index += 1
         self.empty = True
@@ -36,45 +36,14 @@ class System:
         if self.history_index >= 9:
             self.history_index = 0
         bin_history = self.int_to_bin(result_to_store)
-        self.store_to_history_register[self.history_index] = bin_history
+        self.store_to_history_register[self.history_index].append(bin_history)
         self.history_index += 1
         self.temp_history_index = self.history_index
 
-    def add(self, address_num1, address_num2):
-        num1 = self.load_value_from_register(address_num1)
-        num2 = self.load_value_from_register(address_num2)
-        calculated_value = num1 + num2
-        return calculated_value
-
-    def multiply(self, address_num1, address_num2):
-        num1 = self.load_value_from_register(address_num1)
-        num2 = self.load_value_from_register(address_num2)
-        calculated_value = num1 * num2
-        return calculated_value
-
-    def subtraction(self, address_num1, address_num2):
-        num1 = self.load_value_from_register(address_num1)
-        num2 = self.load_value_from_register(address_num2)
-        calculated_value = num1 - num2
-        return calculated_value
-
-    def divide(self, address_num1, address_num2):
-        try:
-            num1 = self.load_value_from_register(address_num1)
-            num2 = self.load_value_from_register(address_num2)
-            calculate_value = 0 
-            if num2 != 0:
-                calculate_value = int(num1 / num2)
-            
-        except:
-            print("Division by 0 error: {}/{}".format(num1, num2))
-            return
-           
-        return calculate_value
-
+ 
     def get_last_calculation(self):
         self.temp_history_index -= 1
-        val = self.bin_to_int(self.history_registers[self.temp_history_index])
+        val = self.bin_to_int(self.history_registers[self.temp_history_index][-1])
         last_value = "Last value: {}".format(val)
         self.update_display(last_value)
 
