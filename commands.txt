@@ -5,7 +5,17 @@
 # DIV
 # DIVI 
 # LW 
-# ADDI 
+# ADDI //
 # SW 
 # XOR
 # J 
+
+Add code Execution with `func.get_exec_time()`
+
+
+--- Math --- 
+Basic operators 
+
+Statistics: Variance, Standard Deviation, Mean, Mode, Median 
+
+Sequences and Series: Sums, and estimating terms for both geometric and arithmetic
