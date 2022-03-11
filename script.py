@@ -40,7 +40,7 @@ class Script:
                 else:
                     pass 
                     
-            if 'MUL' in user_input_split:
+            if 'MUL' in user_input_split or 'MULT' in  user_input_split:
                 result = self.multi(user_input_split)
                 if type(result) == str:
                     print(result)
@@ -243,7 +243,10 @@ class Script:
         third_root_idx = None
         val = 0
         for character in range(len(input_lst)):
-            if character == 1:
+            if input_lst[0] == 'MULT':
+                if character == 5:
+                    break
+            elif character == 1:
                 first_register = input_lst[character]
                 first_register_cleaned = first_register.strip(', ')
                 if '$' not in first_register_cleaned:
@@ -275,7 +278,7 @@ class Script:
                     register_root_idx = int(second_register_idx)
                 else:
                     return 'invalid command'
-        
+                
             elif character == 5:
                 if '$' in input_lst[character]:
                     third_root_cleaned = input_lst[character].strip(', ')
@@ -301,16 +304,19 @@ class Script:
             return 'invalid command'
         root_value = root_register_lst[register_root_idx]
         try:
+            if third_root == None:
+                product = root_value * destination_register_lst[destination_idx]
+                print('Computed Product: {}'.format(product))
+            else:
+                third_register_lst = self.system.number_registers[int(third_root)]
+                third_register_val = third_register_lst[third_root_idx]
 
-            third_register_lst = self.system.number_registers[int(third_root)]
-            third_register_val = third_register_lst[third_root_idx]
-
-            product = root_value * third_register_val
-            destination_register_lst.append(product)
-            self.system.store_to_history_register(product)
-            print('{} has been added succesfully to the register: {}'.format(product, destination_register))
-            return True
-        
+                product = root_value * third_register_val
+                destination_register_lst.append(product)
+                self.system.store_to_history_register(product)
+                print('{} has been added succesfully to the register: {}'.format(product, destination_register))
+                return True
+            
         except IndexError:
             return 'there is no value in register {}'.format(register_root)
 
