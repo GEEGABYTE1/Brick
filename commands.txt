@@ -4,17 +4,15 @@
 # MULTI //
 # DIV // 
 # DIVI //
-# LW 
+# LW //
 # ADDI //
-# SW 
-# XOR
-# J 
-
-Add code Execution with `func.get_exec_time()`
+# SW //
+# XOR // 
+# J // 
 
 
 --- Math --- 
-Basic operators 
+
 
 Statistics: Variance, Standard Deviation, Mean, Mode, Median 
 

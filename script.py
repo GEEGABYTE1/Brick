@@ -79,6 +79,13 @@ class Script:
                 else:
                     pass
 
+            elif 'MEAN' in user_input_split:
+                result = self.mean(user_input_split) 
+                if type(result) == str:
+                    print(result)
+                else:
+                    pass
+
 
     
     def j(self, input_list):
@@ -112,6 +119,34 @@ class Script:
         except:
             return 'invalid command'
 
+
+    def mean(self, input_list):         # Syntax: MEAN $1
+        desired_register = 0 
+        for character in input_list:
+            if character == 1:
+                desired_val = input_list[character]
+                if '$' in desired_val:
+                    desired_val = desired_val.strip(', ')
+                    desired_val = desired_val.strip('$')
+                    desired_register = int(desired_val)
+                else:
+                    return 'invalid command'
+        
+        try:
+            desired_register_lst = self.system.number_registers[desired_register]
+            if len(desired_register_lst) != 0:
+                summation = 0 
+                for elm in desired_register_lst:
+                    summation += int(elm)
+                n_val = len(desired_register_lst)
+                result = summation/n_val
+                print(result)
+            else:
+                print("Registe {} was empty".format(desired_register))
+            
+            return True
+        except:
+            return 'there was an error computing the command'
 
     
     def xor(self, input_list):
