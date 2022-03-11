@@ -6,6 +6,7 @@
 # ("0000010000000000000000010111111")
 
 from register_origin import System
+import math
 
 class Script:
     
@@ -86,8 +87,51 @@ class Script:
                 else:
                     pass
 
+            elif 'STND' in user_input_split or 'VAR' in user_input_split:
+                result = self.sdv(user_input_split)
+                if type(result) == str:
+                    print(result)
+                else:
+                    pass
 
     
+    def sdv(self, input_list):
+        desired_register = 0 
+        for character in input_list:
+            if character == 1:
+                desired_val = input_list[character]
+                if '$' in desired_val:
+                    desired_val = desired_val.strip(', ')
+                    desired_val = desired_val.strip('$')
+                    desired_register = int(desired_val)
+                else:
+                    return 'invalid command'
+        try:
+            desired_register_lst = self.system.number_registers[desired_register]
+            if len(desired_register_lst) != 0:
+                summation = 0 
+                sum_squared = 0
+                for elm in desired_register_lst:
+                    summation += int(elm)
+                    sum_squared = int(elm) ** 2
+                n_val = len(desired_register_lst)
+                u = summation/n_val
+                variance = (sum_squared / n_val) - (u ** 2)
+                
+                if input_list[0] == 'VAR':
+                    print(variance)
+                else:
+                    sd = math.sqrt(variance)
+                    print(sd)
+                
+                return True
+            else:
+                return "Register {} was empty".format(desired_register)
+                
+        except:
+            return 'invalid command'
+    
+
     def j(self, input_list):
         desired_register = 0 
         desired_register_idx = 0 
@@ -164,26 +208,28 @@ class Script:
             
             elif input_list[0] == 'MEDIAN':
                 total_elements = len(desired_register_lst)
-                if total_elements % 2 != 0:
-                    index = (total_elements + 1) / 2
-                    val = desired_register_lst[index] 
-                    print(val)
+                if total_elements == 0:
+                    return "Register {} was empty".format(desired_register)
                 else:
-                    index = (total_elements + 1) / 2
-                    index_int = int(index)
-                    if index_int < index:
-                        first_index = index_int 
-                        second_index = index_int + 1
+                    if total_elements % 2 != 0:
+                        index = (total_elements + 1) / 2
+                        val = desired_register_lst[index] 
+                        print(val)
                     else:
-                        second_index = index_int 
-                        first_index = index_int - 1
-                    
-                    first_val = desired_register_lst[first_index]
-                    second_val = desired_register_lst[second_index]
-                    median_final = (first_val + second_val) / 2
-                    print(median_final)
+                        index = (total_elements + 1) / 2
+                        index_int = int(index)
+                        if index_int < index:
+                            first_index = index_int 
+                            second_index = index_int + 1
+                        else:
+                            second_index = index_int 
+                            first_index = index_int - 1
+                        
+                        first_val = desired_register_lst[first_index]
+                        second_val = desired_register_lst[second_index]
+                        median_final = (first_val + second_val) / 2
+                        print(median_final)
             
-
             return True
         except:
             return 'there was an error computing the command'
