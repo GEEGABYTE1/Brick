@@ -72,6 +72,13 @@ class Script:
                 else:
                     pass
 
+            elif 'J' in user_input_split:
+                result = self.j(user_input_split)
+                if type(result) == str:
+                    print(result)
+                else:
+                    pass
+
 
     
     def xor(self, input_list):
@@ -93,6 +100,7 @@ class Script:
         try:
             self.system.number_registers[desired_register] = []
             print("{} register has been resetted completely".format(desired_register))
+            return True
         except:
             return 'invalid command'
         
