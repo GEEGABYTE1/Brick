@@ -75,7 +75,7 @@ class Script:
         for character in range(len(input_list)):
             if character == 1:
                 root_register_sample = input_list[character]
-                root_register_sample = root_register_sample.split(', ') 
+                root_register_sample = root_register_sample.strip(', ') 
                 if '$' in root_register_sample:
                     root_register = root_register_sample.strip('$')
                     root_register = int(root_register)
@@ -91,7 +91,7 @@ class Script:
                 else:
                     return 'invalid command'  
             elif character == 3:
-                desired_register_sample = input_list[desired_register]
+                desired_register_sample = input_list[character]
                 if '(' in desired_register_sample or ')' in desired_register:
                     desired_register_sample = desired_register_sample.strip('), ')
                     desired_register_sample = desired_register_sample.strip('(')
@@ -104,7 +104,7 @@ class Script:
                     return 'invalid command'
 
             elif character == 4:
-                desired_reg_idx = input_list[desired_reg_idx]
+                desired_reg_idx = input_list[character]
                 if '[' in desired_reg_idx or ']' in desired_reg_idx:
                     desired_reg_idx = desired_reg_idx.strip('], ')
                     desired_reg_idx = desired_reg_idx.strip('[')
@@ -127,9 +127,6 @@ class Script:
             return 'invalid command'        
 
 
-
-
-    
     def lw(self, input_lst):
         destination_register = 0 
         desired_register = 0 
@@ -179,10 +176,7 @@ class Script:
         except:
             return "{} register did not save successfully - index error".format(destination_register)
 
-        
-
-
-        
+            
                
             
 
