@@ -56,7 +56,77 @@ class Script:
                 if type(result) == str:
                     print(result)
                 else:
-                    pass                 
+                    pass   
+
+            elif 'SW' in user_input_split:
+                result = self.sw(user_input_split)
+                if type(result) == str:
+                    print(result)
+                else:
+                    pass
+
+    
+    def sw(self, input_list):
+        root_register = 0 
+        root_register_idx = 0 
+        desired_register = 0 
+        desired_register_idx = 0 
+
+        for character in range(len(input_list)):
+            if character == 1:
+                root_register_sample = input_list[character]
+                root_register_sample = root_register_sample.split(', ') 
+                if '$' in root_register_sample:
+                    root_register = root_register_sample.strip('$')
+                    root_register = int(root_register)
+                else:
+                    return 'invalid command'
+
+            elif character == 2:
+                root_idx_sample = input_list[character]
+                if '[' in root_idx_sample or ']' in root_idx_sample:
+                    root_idx_sample = root_idx_sample.strip('], ')      
+                    root_idx_sample = root_idx_sample.strip('[')
+                    root_register_idx = int(root_idx_sample)
+                else:
+                    return 'invalid command'  
+            elif character == 3:
+                desired_register_sample = input_list[desired_register]
+                if '(' in desired_register_sample or ')' in desired_register:
+                    desired_register_sample = desired_register_sample.strip('), ')
+                    desired_register_sample = desired_register_sample.strip('(')
+                    if '$' in desired_register_sample:
+                        desired_register_sample = desired_register_sample.strip('$')
+                        desired_register = int(desired_register_sample)
+                    else:
+                        return 'invalid command'
+                else:
+                    return 'invalid command'
+
+            elif character == 4:
+                desired_reg_idx = input_list[desired_reg_idx]
+                if '[' in desired_reg_idx or ']' in desired_reg_idx:
+                    desired_reg_idx = desired_reg_idx.strip('], ')
+                    desired_reg_idx = desired_reg_idx.strip('[')
+                    desired_register_idx = int(desired_reg_idx)
+                else:
+                    return 'invalid command'
+
+        try:
+            root_register_lst = self.system.number_registers[root_register]
+            root_value = root_register_lst[root_register_idx]
+
+            desired_register_lst = self.system.number_registers[desired_register]
+            
+            desired_register_lst.append(root_value)
+
+            print("{} has been saved to the register {}".format(root_value, desired_register))
+            return True
+
+        except:
+            return 'invalid command'        
+
+
 
 
     
@@ -98,16 +168,16 @@ class Script:
         
 
         try:
-            register = self.system.number_registers[desired_register]
+            register = self.system.number_registers[int(desired_register)]
             desired_val = register[desired_register_idx]
 
-            destination_register_lst = self.system.number_registers[destination_register]
+            destination_register_lst = self.system.number_registers[int(destination_register)]
             destination_register_lst.append(desired_val)
             print("{} has been added to register {}".format(desired_val, destination_register))
             return True 
         
         except:
-            return "{} did not save uccessfully - index error".format(desired_val)
+            return "{} register did not save successfully - index error".format(destination_register)
 
         
 
