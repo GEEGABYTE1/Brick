@@ -5,9 +5,6 @@
 # ("00000100000000000000000101000000")
 # ("0000010000000000000000010111111")
 
-from atexit import register
-from this import d
-from xml.sax.xmlreader import InputSource
 from register_origin import System
 
 class Script:
@@ -64,50 +61,56 @@ class Script:
 
     
     def lw(self, input_lst):
-        root_register = 0 
         destination_register = 0 
-        destination_register_idx = 0 
-
+        desired_register = 0 
+        desired_register_idx = 0
 
         for character in range(len(input_lst)):
             if character == 1:
-                register = input_lst[character]
-                register = register.strip(', ')
-                if '$' in register:
-                    register_cleaned = register.strip('$')
-                    root_register = int(register_cleaned)
+                destination_reg = input_lst[character]
+                destination_reg = destination_reg.strip(', ')
+                if '$' in destination_reg:
+                    destination_reg = destination_reg.strip('$')
+                    destination_register = destination_reg
                 else:
                     return 'invalid command'
-
             elif character == 2:
-                dest_register = input_lst[character]
-                dest_register = dest_register.strip(', ')
-                if '$' in dest_register:
-                    dest_register_cleaned = dest_register.strip('$')
-                    dest_register_cleaned = int(dest_register_cleaned)
-                else:
-                    return 'invalid command'
-
+                desired_register = input_lst[character]
+                if '(' in desired_register or ')' in desired_register:
+                    desired_register = desired_register.strip(', ')
+                    desired_register = desired_register.strip('(')
+                    desired_register = desired_register.strip(')')
+                    if '$' in desired_register:
+                        desired_register = desired_register.strip('$')
+                    else:
+                        return 'invalid command'
             elif character == 3:
-                destination_register_idx = input_lst[character]
-                if '[' in destination_register_idx or ']' in destination_register_idx:
-                    destination_register_idx = destination_register_idx.strip('], ')
-                    destination_register_idx = destination_register_idx.strip('[')    
-                    destination_register_idx = int(destination_register_idx)
+                des_reg_idx = input_lst[character]
+                if '[' in des_reg_idx or ']' in des_reg_idx:
+                    des_reg_idx = des_reg_idx.strip(']')
+                    des_reg_idx = des_reg_idx.strip('[')
+                    desired_register_idx = int(des_reg_idx)
                 else:
                     return 'invalid command'
+            
             else:
                 continue 
+        
 
-        register = self.system.number_registers[destination_register]
-        goal_register = self.system.number_registers[root_register]
         try:
-            goal_val = register[destination_register_idx]
-            goal_register.append(goal_val)
-            print('{} saved in {}'.format(goal_val, goal_register))
-            return True
+            register = self.system.number_registers[desired_register]
+            desired_val = register[desired_register_idx]
+
+            destination_register_lst = self.system.number_registers[destination_register]
+            destination_register_lst.append(desired_val)
+            print("{} has been added to register {}".format(desired_val, destination_register))
+            return True 
+        
         except:
-            return 'there is no value in the register {}'.format(destination_register)
+            return "{} did not save uccessfully - index error".format(desired_val)
+
+        
+
 
         
                
