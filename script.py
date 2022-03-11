@@ -65,6 +65,41 @@ class Script:
                 else:
                     pass
 
+            elif 'XOR' in user_input_split:
+                result = self.xor(user_input_split)
+                if type(result) == str:
+                    print(result)
+                else:
+                    pass
+
+
+    
+    def xor(self, input_list):
+        desired_register = 0 
+        for character in input_list:
+            if character == 1:
+                desired_val = input_list[character]
+                if '$' in desired_val:
+                    desired_val = desired_val.strip('$')
+                    desired_register = int(desired_val)
+                else:
+                    return 'invalid command'
+
+            elif character > 1:
+                break
+            else:
+                continue
+        
+        try:
+            self.system.number_registers[desired_register] = []
+            print("{} register has been resetted completely".format(desired_register))
+        except:
+            return 'invalid command'
+        
+
+        
+
+
     
     def sw(self, input_list):
         root_register = 0 
