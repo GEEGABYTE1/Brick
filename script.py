@@ -81,6 +81,39 @@ class Script:
 
 
     
+    def j(self, input_list):
+        desired_register = 0 
+        desired_register_idx = 0 
+
+        for character in input_list:
+            if character == 1:
+                desired_register = input_list[character].strip(', ')
+                if '$' in input_list[character]:
+                    desired_register = desired_register.strip('$')
+                    desired_register = int(desired_register)
+                else:
+                    return 'invalid command'
+            elif character == 2:
+                desired_register_idx = input_list[character]
+                if '[' in desired_register_idx or ']' in desired_register_idx:
+                    desired_register_idx = desired_register_idx.strip('[')
+                    desired_register_idx = desired_register_idx.strip('], ')
+                    desired_register_idx = int(desired_register_idx)
+                else:
+                    return 'invalid command'
+        
+        try:
+            desired_register = self.system.number_registers[desired_register]
+            desired_instruction = desired_register[desired_register_idx]
+            print('-'*24)
+            print('\n')
+            print(desired_instruction)
+            return True
+        except:
+            return 'invalid command'
+
+
+    
     def xor(self, input_list):
         desired_register = 0 
         for character in input_list:
