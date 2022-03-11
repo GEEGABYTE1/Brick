@@ -79,7 +79,7 @@ class Script:
                 else:
                     pass
 
-            elif 'MEAN' in user_input_split:
+            elif 'MEAN' in user_input_split or 'MODE' in user_input_split or 'MEDI' in user_input_split:        # MEDI = MEDIAN
                 result = self.mean(user_input_split) 
                 if type(result) == str:
                     print(result)
