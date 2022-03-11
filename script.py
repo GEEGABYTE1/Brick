@@ -46,12 +46,71 @@ class Script:
                     print(result)
                 else:
                     pass 
-            
 
+            if 'DIV' in user_input_split or 'DIVT' in user_input_split:
+                result = self.multi(user_input_split) 
+                if type(result) == str:
+                    print(result)
+                else:
+                    pass 
             
+            if 'LW' in user_input_split:
+                result = self.lw(user_input_split)
+                if type(result) == str:
+                    print(result)
+                else:
+                    pass                 
 
-                      
-                        
+
+    
+    def lw(self, input_lst):
+        root_register = 0 
+        destination_register = 0 
+        destination_register_idx = 0 
+
+
+        for character in range(len(input_lst)):
+            if character == 1:
+                register = input_lst[character]
+                register = register.strip(', ')
+                if '$' in register:
+                    register_cleaned = register.strip('$')
+                    root_register = int(register_cleaned)
+                else:
+                    return 'invalid command'
+
+            elif character == 2:
+                dest_register = input_lst[character]
+                dest_register = dest_register.strip(', ')
+                if '$' in dest_register:
+                    dest_register_cleaned = dest_register.strip('$')
+                    dest_register_cleaned = int(dest_register_cleaned)
+                else:
+                    return 'invalid command'
+
+            elif character == 3:
+                destination_register_idx = input_lst[character]
+                if '[' in destination_register_idx or ']' in destination_register_idx:
+                    destination_register_idx = destination_register_idx.strip('], ')
+                    destination_register_idx = destination_register_idx.strip('[')    
+                    destination_register_idx = int(destination_register_idx)
+                else:
+                    return 'invalid command'
+            else:
+                continue 
+
+        register = self.system.number_registers[destination_register]
+        goal_register = self.system.number_registers[root_register]
+        try:
+            goal_val = register[destination_register_idx]
+            goal_register.append(goal_val)
+            print('{} saved in {}'.format(goal_val, goal_register))
+            return True
+        except:
+            return 'there is no value in the register {}'.format(destination_register)
+
+        
+               
             
 
     def addi(self, input_lst):                          # Format ADDI $1, [idx1], $2, [idx2], Const_val

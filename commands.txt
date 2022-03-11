@@ -2,8 +2,8 @@
 # SUBI // 
 # MULT //
 # MULTI //
-# DIV
-# DIVI 
+# DIV // 
+# DIVI //
 # LW 
 # ADDI //
 # SW 
