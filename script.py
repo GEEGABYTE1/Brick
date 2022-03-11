@@ -134,16 +134,56 @@ class Script:
         
         try:
             desired_register_lst = self.system.number_registers[desired_register]
-            if len(desired_register_lst) != 0:
-                summation = 0 
-                for elm in desired_register_lst:
-                    summation += int(elm)
-                n_val = len(desired_register_lst)
-                result = summation/n_val
-                print(result)
-            else:
-                print("Registe {} was empty".format(desired_register))
+            if input_list[0] == 'MEAN':
+                if len(desired_register_lst) != 0:
+                    summation = 0 
+                    for elm in desired_register_lst:
+                        summation += int(elm)
+                    n_val = len(desired_register_lst)
+                    result = summation/n_val
+                    print(result)
+                else:
+                    return "Register {} was empty".format(desired_register)
+            elif input_list[0] == 'MODE':
+                elm_counts = {}
+                if len(desired_register_lst) != 0:
+                    for elm in desired_register_lst:
+                        elm_counts[elm] = 0
+                    for elm in desired_register_lst:
+                        elm_counts[elm] += 1
+                    counts = list(elm_counts.values())
+                    counts_sorted = sorted(counts)
+                    max_count = counts_sorted[-1]
+                    for elm, count in elm_counts.items():
+                        if count == max_count:
+                            print(elm)
+                        else:
+                            continue
+                else:
+                    return "Register {} was empty".format(desired_register)
             
+            elif input_list[0] == 'MEDIAN':
+                total_elements = len(desired_register_lst)
+                if total_elements % 2 != 0:
+                    index = (total_elements + 1) / 2
+                    val = desired_register_lst[index] 
+                    print(val)
+                else:
+                    index = (total_elements + 1) / 2
+                    index_int = int(index)
+                    if index_int < index:
+                        first_index = index_int 
+                        second_index = index_int + 1
+                    else:
+                        second_index = index_int 
+                        first_index = index_int - 1
+                    
+                    first_val = desired_register_lst[first_index]
+                    second_val = desired_register_lst[second_index]
+                    median_final = (first_val + second_val) / 2
+                    print(median_final)
+            
+
             return True
         except:
             return 'there was an error computing the command'
