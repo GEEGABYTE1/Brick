@@ -321,6 +321,93 @@ class Script:
             return 'there is no value in register {}'.format(register_root)
 
 
+    def div(self, input_lst):                          # Format ADDI $1, [idx1], $2, [idx2], Const_val
+        destination_register = 0                        # Third Root needs to specified 
+        destination_idx = 0                             
+        register_root = 0 
+        register_root_idx = 0 
+        third_root = None
+        third_root_idx = None
+        val = 0
+        for character in range(len(input_lst)):
+            if input_lst[0] == 'DIVT':
+                if character == 5:
+                    break
+            elif character == 1:
+                first_register = input_lst[character]
+                first_register_cleaned = first_register.strip(', ')
+                if '$' not in first_register_cleaned:
+                    return 'invalid command'
+                else:
+                    destination_register = first_register_cleaned.strip('$')
+            elif character == 2:
+                first_register_idx = input_lst[character]
+                if '[' in first_register_idx and ']' in first_register_idx:
+                    first_register_idx = first_register_idx.strip('[')
+                    first_register_idx = first_register_idx.strip('], ')
+                    destination_idx = int(first_register_idx)
+                else:
+                    return 'invalid command'
+
+            elif character == 3:
+                second_register = input_lst[character]
+                second_register_cleaned = second_register.strip(', ')
+                if '$' in second_register_cleaned:
+                    register_root = second_register_cleaned.strip('$')
+                else:
+                    return 'invalid command'
+
+            elif character == 4:
+                second_register_idx = input_lst[character]
+                if '[' in second_register_idx and ']' in second_register_idx:
+                    second_register_idx = second_register_idx.strip('[')
+                    second_register_idx = second_register_idx.strip('], ')
+                    register_root_idx = int(second_register_idx)
+                else:
+                    return 'invalid command'
+                
+            elif character == 5:
+                if '$' in input_lst[character]:
+                    third_root_cleaned = input_lst[character].strip(', ')
+                    third_root_cleaned = third_root_cleaned.strip('$')
+                    third_root = third_root_cleaned
+                else:
+                    return 'invalid command'
+            elif character == 6:
+                third_register_idx = input_lst[character]
+                if '[' in third_register_idx or ']' in third_register_idx:
+                    third_register_idx = third_register_idx.strip('], ')
+                    third_register_idx = third_register_idx.strip('[')
+                    third_root_idx = int(third_register_idx)
+            else:
+                continue 
+    
+        destination_register_lst = self.system.number_registers[int(destination_register)]
+        if destination_idx >= len(destination_register_lst):
+            return 'invalid command'
+        
+        root_register_lst = self.system.number_registers[int(register_root)]
+        if register_root_idx > len(root_register_lst):
+            return 'invalid command'
+        root_value = root_register_lst[register_root_idx]
+        try:
+            if third_root == None:
+                divisor = root_value / destination_register_lst[destination_idx]
+                print('Computed Divisor: {}'.format(divisor))
+            else:
+                third_register_lst = self.system.number_registers[int(third_root)]
+                third_register_val = third_register_lst[third_root_idx]
+
+                divisor = root_value / third_register_val
+                destination_register_lst.append(divisor)
+                self.system.store_to_history_register(divisor)
+                print('{} has been added succesfully to the register: {}'.format(divisor, destination_register))
+                return True
+            
+        except IndexError:
+            return 'there is no value in register {}'.format(register_root)
+
+
 
  
 process = Script()
