@@ -15,7 +15,7 @@ Add a value from the directory with a constant. In order for the process to run,
 
 Syntax : `ADDI $destination_registry_num, [index_for_destination_registry], $root_registry_num, [index_for_root_registry], constant_val` 
 
-The resulting command will add the sum between desired values to the desired registry. 
+The resulting command will add the sum between desired values and save it to the desired registry. 
 
 To access and numbers to registry, you may use binary commands, which are listed on `systemback.py`
 
@@ -25,9 +25,45 @@ Add a value from a directory to another value from *another* directory. In order
 
 Syntax: `ADD $destination_registry_num, [index_for_destination_registry], $root_registry_num, [index_for_root_registry], $root_registry_num2, [index_for_root_registry2]` 
 
-The resulting command will add the sum between desired values to the desired registry.
+The resulting command will add the sum between desired values and save it to the desired registry.
 
+# SUB
 
+Subtracts a constant from a value specified in a directory. There must be values in the specified directory in order for the program to fetch the value. 
+
+Syntax : `SUBI $destination_registry_num, [index_for_destination_registry], $root_registry_num, [index_for_root_registry], constant_val` 
+
+# SUB
+
+Subtracts a value from one registry with another value from a different registry. It should be noted that both registries that are being worked with must have values within.
+
+Syntax: `SUB $destination_registry_num, [index_for_destination_registry], $root_registry_num, [index_for_root_registry], $root_registry_num2, [index_for_root_registry2]` 
+
+# MULT 
+
+Multiplies a value from a specific registry with a constant, and saves it to a destination registry.
+
+Syntax : `MULT $destination_registry_num, [index_for_destination_registry], $root_registry_num, [index_for_root_registry], constant_val` 
+
+# MUL
+
+Multiplies a value from one registry with another value from another registry. The final product gets saved to specified destination registry.
+
+Syntax: `MUL $destination_registry_num, [index_for_destination_registry], $root_registry_num, [index_for_root_registry], $root_registry_num2, [index_for_root_registry2]` 
+
+# DIVT 
+
+Divides a value from one registry with a constant. The final quotient gets saved to a destination registry specified. 
+
+Syntax: `DIVT $destination_registry_num, [index_for_destination_registry], $root_registry_num, [index_for_root_registry], constant_val` 
+
+*Note*: The program will output an error message if eith value being divided is 0, or there is no value at all.
+
+# DIV
+
+Divides a value from one registry with another value in another registry. The resulting quotient will be saved in another destination registry.
+
+Syntax: `DIV $destination_registry_num, [index_for_destination_registry], $root_registry_num, [index_for_root_registry], $root_registry_num2, [index_for_root_registry2]` 
 
 # Error 
 
