@@ -93,7 +93,33 @@ Jumps to a desired register, and executes the instruction within.
 
 Syntax: `J $desired_register, [desired_register_idx]`
 
+# Measures of Central Tendency
 
+Brick can compute basic central tendency data with values within a register.
+
+## Mean
+
+Computes the Mean of a register.
+
+Syntax: `MEAN $desired_register`
+
+The register must have some values in order for an actual output to be seen.
+
+## Median
+
+Computes the median of a register.
+
+Syntax: `MEDI $desired_register`
+
+The register cannot be empty, otherwise, the program will prompt an ouput.
+
+## Mode
+
+Computes the Mode of a register.
+
+Syntax: `MODE $desired_register`
+
+For the program to output a value, the register must have some values.
 
 
 # Error 
