@@ -9,6 +9,7 @@ Brick does basic statistical and arithmetic Calculations.
 However, in the future, there may be more commands coming to support more mathematical computation processes by the request of the public!
 
 
+
 To interact with registers, inputs must be in binary code as described in `systemback.py`. Assembly Language is to use basic arithmetic operations with different registers. There are specific commmands listed below:
 
 # Arithmetic
@@ -161,6 +162,16 @@ There are possiblities of an error occuring most commonly if the syntax is typed
 
 More information can be found under `systemback.py`
 
+# Adding Values to the Register
+
+To add data to the register, there is no specific command. Users must type a binary code that start with 
+`000001` in order for the program to read the command. The program follows the USCC Headquarter's Instruction Set Architecture.
+
+A sample binary code may be: `00000100000000000000001010000000`
+
+This code will add 10 to register `1`. If you have typed a correct binary code, Brick will ouput a successful message that the data value has been saved to the specified register. However, if not, the program will ouput an error message `INVALID OPCODE`.
+
+For instructions on how to create a successful binary code,view `systemback.py`.
 
 # Extra Information
 
