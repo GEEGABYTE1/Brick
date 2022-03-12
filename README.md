@@ -65,6 +65,37 @@ Divides a value from one registry with another value in another registry. The re
 
 Syntax: `DIV $destination_registry_num, [index_for_destination_registry], $root_registry_num, [index_for_root_registry], $root_registry_num2, [index_for_root_registry2]` 
 
+# LW
+
+Loads a value from register to another register.
+
+Syntax: `LW $destination_register_num, ($root_registry), [root_register_index]`
+
+*Note*: It should be worth mentioning that the destination registry should be surrounded by brackets in order for the program to know that the destination registry is specified explicitly.
+
+# SW
+
+Stores a value from a registry to another desired register.
+
+Syntax: `SW $root_register, [root_register_index],($destination_register)`
+
+*Note*: It should be worth mentioning that the destination registry should be surrounded by brackets in order for the program to know that the destination registry is specified explicitly.
+
+# XOR
+
+Reset a desired register. All the contents in the register specified will be removed.
+
+Syntax: `XOR $desired_register`
+
+# J 
+
+Jumps to a desired register, and executes the instruction within.
+
+Syntax: `J $desired_register, [desired_register_idx]`
+
+
+
+
 # Error 
 
 There are possiblities of an error occuring most commonly if the syntax is typed wrong. However, possible errors can arise if 1) the desired destination registry is empty, or the index you specify is larger than the length of the registry itself. In both cases, these issues can be solved by adding values to registries by typing binary code with that start with `000001`. 
