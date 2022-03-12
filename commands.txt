@@ -12,8 +12,10 @@
 
 
 --- Math --- 
+Standard Deviation
+Variance 
+Mean 
+Mode 
+Median
 
 
-Statistics: Variance, Standard Deviation, Mean, Mode, Median 
-
-Sequences and Series: Sums, and estimating terms for both geometric and arithmetic

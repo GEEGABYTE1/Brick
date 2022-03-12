@@ -95,7 +95,7 @@ class Script:
                     pass
 
     
-    def sdv(self, input_list):
+    def sdv(self, input_list):      # Syntax STND $1
         desired_register = 0 
         for character in input_list:
             if character == 1:

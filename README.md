@@ -19,9 +19,22 @@ The resulting command will add the sum between desired values to the desired reg
 
 To access and numbers to registry, you may use binary commands, which are listed on `systemback.py`
 
-## Error 
+# ADD 
+
+Add a value from a directory to another value from *another* directory. In order for the process to run, there must be a values already in each directory specified. 
+
+Syntax: `ADD $destination_registry_num, [index_for_destination_registry], $root_registry_num, [index_for_root_registry], $root_registry_num2, [index_for_root_registry2]` 
+
+The resulting command will add the sum between desired values to the desired registry.
+
+
+
+# Error 
 
 There are possiblities of an error occuring most commonly if the syntax is typed wrong. However, possible errors can arise if 1) the desired destination registry is empty, or the index you specify is larger than the length of the registry itself. In both cases, these issues can be solved by adding values to registries by typing binary code with that start with `000001`. 
 
 More information can be found under `systemback.py`
+
+
+
 
