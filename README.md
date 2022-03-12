@@ -1,4 +1,4 @@
-# Brick - An Assembly Language for Math
+# Brick - An Assembly Language for Math 🧱
 
 Brick is an Assembly language for mathematical operations made in Python. Brick uses the MIPS architecture to maintain registries and for interaction.
 
@@ -153,7 +153,7 @@ The register specified must have some values to interact with.
 
 
 
-# Error 
+# Errors
 
 There are possiblities of an error occuring most commonly if the syntax is typed wrong. However, possible errors can arise if 1) the desired destination registry is empty, or the index you specify is larger than the length of the registry itself. In both cases, these issues can be solved by adding values to registries by typing binary code with that start with `000001`. 
 
