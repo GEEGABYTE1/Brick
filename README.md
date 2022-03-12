@@ -4,7 +4,9 @@ Brick is an Assembly language for mathematical operations made in Python. Brick 
 
 Moreover, the interaction of registries is inspired by USCC's computations.
 
-Brick does basic statistical, arithmetic, and series and sequence calculations at the moment.
+Brick does basic statistical and arithmetic Calculations.
+
+However, in the future, there may be more commands coming to support more mathematical computation processes by the request of the public!
 
 
 To interact with registers, inputs must be in binary code as described in `systemback.py`. Assembly Language is to use basic arithmetic operations with different registers. There are specific commmands listed below:
@@ -155,8 +157,16 @@ The register specified must have some values to interact with.
 
 There are possiblities of an error occuring most commonly if the syntax is typed wrong. However, possible errors can arise if 1) the desired destination registry is empty, or the index you specify is larger than the length of the registry itself. In both cases, these issues can be solved by adding values to registries by typing binary code with that start with `000001`. 
 
+*Note*: This method can also be used if there are no values in the registry. 
+
 More information can be found under `systemback.py`
 
+
+# Extra Information
+
+Feel free to reach out (check my github bio for contact info or www.jaivalpatel.com) to me if you have any questions or found errors, I would love to chat! 
+
+Made by Jaival 🦖
 
 
 
